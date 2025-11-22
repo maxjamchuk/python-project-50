@@ -6,14 +6,23 @@ def build_parser() -> argparse.ArgumentParser:
         prog="gendiff",
         description="Compares two configuration files and shows a difference.",
     )
+
     parser.add_argument("first_file")
     parser.add_argument("second_file")
+
+    parser.add_argument(
+        "-f",
+        "--format",
+        help="set format of output",
+        metavar="FORMAT",
+    )
+
     return parser
 
 
 def main() -> None:
     parser = build_parser()
-    parser.parse_args()
+    args = parser.parse_args()
 
 
 if __name__ == "__main__":
