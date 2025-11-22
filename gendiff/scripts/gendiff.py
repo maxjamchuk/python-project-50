@@ -1,5 +1,7 @@
 import argparse
 
+from gendiff import generate_diff
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -23,6 +25,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
+
+    generate_diff(args.first_file, args.second_file)
 
 
 if __name__ == "__main__":
