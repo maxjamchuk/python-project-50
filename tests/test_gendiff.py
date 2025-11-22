@@ -15,3 +15,13 @@ def test_generate_diff_flat_json() -> None:
     expected = read_file(FIXTURES_DIR / "expected_flat.txt")
     diff = generate_diff(str(file1), str(file2))
     assert diff == expected
+
+
+def test_generate_diff_flat_yaml() -> None:
+    file1 = FIXTURES_DIR / "file1.yml"
+    file2 = FIXTURES_DIR / "file2.yml"
+    expected = read_file(FIXTURES_DIR / "expected_flat.txt")
+
+    diff = generate_diff(str(file1), str(file2))
+
+    assert diff == expected

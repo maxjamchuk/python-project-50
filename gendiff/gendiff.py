@@ -1,10 +1,6 @@
-import json
 from typing import Any
 
-
-def read_json(path: str) -> dict[str, Any]:
-    with open(path) as f:
-        return json.load(f)
+from .parsers import parse
 
 
 def to_str(value: Any) -> str:
@@ -43,6 +39,6 @@ def build_diff(first: dict[str, Any], second: dict[str, Any]) -> str:
 
 
 def generate_diff(first_file: str, second_file: str) -> str:
-    first_data = read_json(first_file)
-    second_data = read_json(second_file)
+    first_data = parse(first_file)
+    second_data = parse(second_file)
     return build_diff(first_data, second_data)
