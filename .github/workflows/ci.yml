@@ -25,7 +25,7 @@ jobs:
       - name: Sync dependencies
         run: uv sync --group dev
 
-      - name: Lint
+      - name: Lint (ruff)
         run: uv run ruff check gendiff tests
 
       - name: Tests (with coverage)
@@ -35,3 +35,4 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: "https://sonarcloud.io"
