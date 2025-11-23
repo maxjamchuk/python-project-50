@@ -16,3 +16,10 @@
 [![asciicast](https://asciinema.org/a/ihBEZsuItZaTBFvKNEo9J405m.svg)](https://asciinema.org/a/ihBEZsuItZaTBFvKNEo9J405m)
 
 </details>
+
+<details>
+<summary>Diff plain</summary>
+  
+[![asciicast](https://asciinema.org/a/lRmjmjOXmQtzdbIGeXx4p6gar.svg)](https://asciinema.org/a/lRmjmjOXmQtzdbIGeXx4p6gar)
+
+</details>
