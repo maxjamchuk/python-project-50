@@ -13,7 +13,10 @@ class DiffNode(TypedDict, total=False):
     children: list["DiffNode"]
 
 
-def build_diff_tree(first: dict[str, Any], second: dict[str, Any]) -> list[DiffNode]:
+def build_diff_tree(
+        first: dict[str, Any],
+        second: dict[str, Any]
+    ) -> list[DiffNode]:
     nodes: list[DiffNode] = []
     all_keys = sorted(set(first.keys()) | set(second.keys()))
 

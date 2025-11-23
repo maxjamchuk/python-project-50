@@ -40,7 +40,11 @@ def build_diff(first: dict[str, Any], second: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def generate_diff(first_file: str, second_file: str, format_name: str = "stylish") -> str:
+def generate_diff(
+        first_file: str,
+        second_file: str,
+        format_name: str = "stylish"
+    ) -> str:
     first_data: dict[str, Any] = parse(first_file)
     second_data: dict[str, Any] = parse(second_file)
     tree: list[DiffNode] = build_diff_tree(first_data, second_data)

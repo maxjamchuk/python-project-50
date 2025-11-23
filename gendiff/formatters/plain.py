@@ -4,33 +4,19 @@ from gendiff.diff_tree import DiffNode
 
 
 def _stringify(value: Any) -> str:
-    handlers = {
-        dict: lambda _: "[complex value]",
-        list: lambda _: "[complex value]",
-        bool: lambda v: str(v).lower(),
-        type(None): lambda _: "null",
-        int: str,
-        float: str,
-    }
-
-    for t, f in handlers.items():
-        if isinstance(value, t):
-            return f(value)
-
+    if isinstance(value, (dict, list)):
+        return "[complex value]"
+    if isinstance(value, bool):
+        return str(value).lower()
+    if value is None:
+        return "null"
+    if isinstance(value, (int, float)):
+        return str(value)
     return f"'{value}'"
 
 
 def _walk(nodes: list[DiffNode], parent_path: str = "") -> list[str]:
-    lines = []
-
-    handlers = {
-        "added": lambda n, path: f"Property '{path}' was added with value: {_stringify(n['value'])}",
-        "removed": lambda n, path: f"Property '{path}' was removed",
-        "updated": lambda n, path: (
-            f"Property '{path}' was updated. "
-            f"From {_stringify(n['old_value'])} to {_stringify(n['new_value'])}"
-        ),
-    }
+    lines: list[str] = []
 
     for node in nodes:
         node_type = node["type"]
@@ -39,13 +25,28 @@ def _walk(nodes: list[DiffNode], parent_path: str = "") -> list[str]:
 
         if node_type == "nested":
             lines.extend(_walk(node["children"], path))
+        elif node_type == "added":
+            value_str = _stringify(node["value"])
+            lines.append(
+                f"Property '{path}' was added with value: {value_str}",
+            )
+        elif node_type == "removed":
+            lines.append(
+                f"Property '{path}' was removed",
+            )
+        elif node_type == "updated":
+            old_str = _stringify(node["old_value"])
+            new_str = _stringify(node["new_value"])
+            lines.append(
+                (
+                    f"Property '{path}' was updated. "
+                    f"From {old_str} to {new_str}"
+                ),
+            )
         elif node_type == "unchanged":
             continue
-        else:
-            lines.append(handlers[node_type](node, path))
 
     return lines
-
 
 
 def format_plain(tree: list[DiffNode]) -> str:
