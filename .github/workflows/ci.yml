@@ -36,3 +36,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: "https://sonarcloud.io"
+
+      - name: Check coverage.xml presence
+        run: |
+          ls -la
+          if [ -f coverage.xml ]; then
+            echo "coverage.xml exists"
+          else
+            echo "coverage.xml MISSING"
+            exit 1
+          fi
