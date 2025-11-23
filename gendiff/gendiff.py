@@ -1,6 +1,8 @@
 from typing import Any
 
 from .parsers import parse
+from .diff_tree import build_diff_tree, DiffNode
+from .formatters import format_diff
 
 
 def to_str(value: Any) -> str:
@@ -38,7 +40,8 @@ def build_diff(first: dict[str, Any], second: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def generate_diff(first_file: str, second_file: str) -> str:
-    first_data = parse(first_file)
-    second_data = parse(second_file)
-    return build_diff(first_data, second_data)
+def generate_diff(first_file: str, second_file: str, format_name: str = "stylish") -> str:
+    first_data: dict[str, Any] = parse(first_file)
+    second_data: dict[str, Any] = parse(second_file)
+    tree: list[DiffNode] = build_diff_tree(first_data, second_data)
+    return format_diff(tree, format_name=format_name)

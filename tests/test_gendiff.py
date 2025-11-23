@@ -25,3 +25,23 @@ def test_generate_diff_flat_yaml() -> None:
     diff = generate_diff(str(file1), str(file2))
 
     assert diff == expected
+
+
+def test_generate_diff_nested_json_stylish() -> None:
+    file1 = FIXTURES_DIR / "nested1.json"
+    file2 = FIXTURES_DIR / "nested2.json"
+    expected = read_file(FIXTURES_DIR / "expected_stylish_nested.txt")
+
+    diff = generate_diff(str(file1), str(file2), format_name="stylish")
+
+    assert diff == expected
+
+
+def test_generate_diff_nested_yaml_stylish() -> None:
+    file1 = FIXTURES_DIR / "nested1.yml"
+    file2 = FIXTURES_DIR / "nested2.yml"
+    expected = read_file(FIXTURES_DIR / "expected_stylish_nested.txt")
+
+    diff = generate_diff(str(file1), str(file2))
+
+    assert diff == expected
