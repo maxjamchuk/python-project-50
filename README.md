@@ -23,3 +23,10 @@
 [![asciicast](https://asciinema.org/a/lRmjmjOXmQtzdbIGeXx4p6gar.svg)](https://asciinema.org/a/lRmjmjOXmQtzdbIGeXx4p6gar)
 
 </details>
+
+<details>
+<summary>JSON print</summary>
+  
+[![asciicast](https://asciinema.org/a/XvStBOiYny3NK9wc7gUhnF9IG.svg)](https://asciinema.org/a/XvStBOiYny3NK9wc7gUhnF9IG)
+
+</details>
