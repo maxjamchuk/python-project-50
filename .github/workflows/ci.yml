@@ -29,10 +29,18 @@ jobs:
         run: uv run ruff check gendiff tests
 
       - name: Tests (with coverage)
-        run: uv run pytest --cov=gendiff --cov-report=xml
+        run: uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: "https://sonarcloud.io"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=maxjamchuk
+            -Dsonar.projectKey=maxjamchuk_python-project-50
+            -Dsonar.python.version=3.12
+            -Dsonar.sources=gendiff
+            -Dsonar.tests=tests
+            -Dsonar.python.coverage.reportPaths=coverage.xml
